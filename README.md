@@ -13,3 +13,8 @@ Instructions:
 - Start a local server: `python -m SimpleHTTPServer 8000`
 - Open your browser to: `http://localhost:8000`
 - Refresh.
+
+If in master:
+- `git checkout gh-pages`
+- `git rebase master`
+- `git push origin gh-pages`
