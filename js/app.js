@@ -18,28 +18,23 @@ for (var i = 0; i < Y_SIZE; i++) {
 
 
 var draw = function (array) {
+
     for (var i = 0; i < Y_SIZE; i++) {
       for (var j = 0; j < X_SIZE; j++) {
         //console.log(i + ' ' + j);
         if ( array[i][j] == 1)
         {
-          html += '<img src="http://placecorgi.com/64" />';
+          html += '<img src="http://placecorgi.com/64" />'; // alive
         }
         else {
-          html += '<img src="http://www.fillmurray.com/64/64" />';
+          html += '<img src="http://www.fillmurray.com/64/64" />'; // dead 
         }
       }
     }
 }
 
-document.addEventListener("DOMContentLoaded", function(event) { 
-  
-  draw(derp);
 
-  document.getElementById("game").innerHTML = html;
-});
-
-
+// Show how many alive 
 var look = function(x, y) {
   var count = 0;
 
@@ -140,5 +135,65 @@ var look = function(x, y) {
   return count;
 };
 
-console.log( look(8,7) );
+var calculate = function (numOfNeighbors, state) {
+  /*
+    - Any live cell with fewer than two live neighbours dies,
+     as if caused by under-population.
+    - Any live cell with two or three live neighbours lives
+     on to the next generation.
+    - Any live cell with more than three live neighbours dies,
+     as if by over-population.
+    - Any dead cell with exactly three live neighbours
+     becomes a live cell, as if by reproduction.
+  */
+  if (state) {
+    if (numOfNeighbors < 2) {
+      return false;
+    }
+    else if (numOfNeighbors == 2 || numOfNeighbors == 3) {
+      return true;
+    }
+    else if (numOfNeighbors > 3) {
+      return false;
+    }
+  }
+  else {
+    if (numOfNeighbors === 3) {
+      return true;
+    }
+  }
+};
+
+var drawSecond = function (array) {
+  
+    for (var i = 0; i < Y_SIZE; i++) {
+      for (var j = 0; j < X_SIZE; j++) {
+        var numOfNeighbors = look(i,j);
+        //debugger;
+        var state = calculate( numOfNeighbors, array[i][j] );
+
+
+        if (state)
+        {
+          html += '<img src="http://placecorgi.com/64" />'; // alive
+        }
+        else {
+          html += '<img src="http://www.fillmurray.com/64/64" />'; // dead 
+        }
+      }
+    }
+}
+
+
+document.addEventListener("DOMContentLoaded", function(event) { 
+  
+  draw(derp);
+  html += '<br><br>';
+  drawSecond(derp);
+
+  document.getElementById("game").innerHTML = html;
+});
+
+
+//console.log( look(1,1) );
 
