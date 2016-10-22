@@ -23,3 +23,7 @@ Authors: Machiko Yasuda [@machikoyasuda](http://github.com/machikoyasuda) & Tim 
 - `git rebase master`
 - `git push origin gh-pages`
 - Open browser to: `http://tlobes.github.io/conwayscorgis/`
+
+## Thanks to corgis & Bill Murray
+- Corgi images from: http://placecorgi.com/64
+- Bill Murray images from: http://www.fillmurray.com/64/64
